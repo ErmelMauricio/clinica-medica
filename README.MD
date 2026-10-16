@@ -7,7 +7,7 @@
 > - Consultar histórico do prontuário
 > - Confirmar consulta
 
-> ## Membros do Grupo
+> ### Membros do Grupo
 > - Graziela
 > - Davi
 > - Mauricio
