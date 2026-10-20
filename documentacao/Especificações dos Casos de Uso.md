@@ -11,7 +11,7 @@
 - **Ator 3:** Paciente
 >Usuário que busca atendimento na clínica, responsável por solicitar marcação de consultas e solicitar o cancelamento de seus agendamentos.
 
-
+---
 ## Caso de Uso 1: Cadastrar Paciente
 
 >Permite à **Recepcionista** registrar os dados pessoais, de contato e convênio médico de um novo paciente no sistema para habilitá-lo ao agendamento de consultas e atendimentos.
@@ -48,7 +48,7 @@
 ### Condições Posteriores:
 >O sistema exibe a mensagem: “Paciente cadastrado com sucesso!”.
 
-
+---
 ## Caso de Uso 2: Agendar Consulta
 
 >Permite à **Recepcionista** ou ao **Paciente** marcar uma consulta médica, selecionando a especialidade, o médico, a data e o horário desejado dentre os disponíveis na agenda. 
@@ -91,7 +91,7 @@
 ### Ponto de Extensão:
 >A verificação de horários é parte essencial e não pode ser desassociada da ação de efetuar um agendamento.
 
-
+---
 ## Caso de Uso 3: Registrar Atendimento Médico
 
 >Permite ao **Médico** registrar as informações da consulta clínica realizada com o paciente, incluindo anamnese, sintomas, exame físico, diagnóstico (CID) e conduta terapêutica no prontuário eletrônico.
@@ -134,3 +134,71 @@
    
 - **Caso de Uso Estendido: Solicitar Exames:**
   *Ocorre apenas se houver necessidade clínica de exames laboratoriais ou de imagem complementares para fechamento de diagnóstico.*
+
+---
+
+## Caso de Uso 4: Registrar Pagamento
+
+> Permite que a **Recepcionista** registre como o pagamento de uma consulta agendada foi realizado: para atendimento particular, a forma de pagamento e o comprovante anexado. Em caso de convênio, a operadora e o número da carteirinha.
+
+### Ator Principal:
+
+> **Recepcionista**.
+
+### Fluxo Básico (Particular):
+
+1. A **Recepcionista** acessa a funcionalidade "Registrar Pagamento".
+2. A **Recepcionista** localiza o paciente informando o CPF.
+3. O sistema exibe as consultas agendadas do paciente com pagamento pendente.
+4. A **Recepcionista** seleciona a consulta desejada.
+5. O sistema exibe os dados da consulta (paciente, médico, data, hora) e a modalidade de pagamento "Particular".
+6. A **Recepcionista** seleciona a forma de pagamento (Pix, Débito ou Crédito) e anexa o comprovante (print ou foto).
+7. Caso o paciente tenha pago com mais de uma forma, a **Recepcionista** repete o passo 6 para cada forma adicional.
+8. A **Recepcionista** clica em "Registrar Pagamento".
+9. O sistema valida os dados e armazena os registros e comprovantes, vinculando-os à consulta.
+
+### Fluxos Alternativos:
+
+**Pagamento via Convênio:**  
+_No passo 5 do fluxo básico, a recepcionista pode selecionar também a opção "Convênio" como modalidade de pagamento._
+
+1. O sistema solicita a operadora e o número da carteirinha.
+2. A **Recepcionista** preenche os dados e clica em "Registrar Pagamento".
+3. O sistema valida os campos e armazena os dados do convênio vinculados à consulta.
+4. O fluxo segue para o passo 9 do fluxo básico (condições posteriores).
+
+**Paciente sem consultas pendentes de pagamento:**  
+_No passo 3 do fluxo básico, caso o paciente não possua consulta agendada com pagamento pendente._
+
+1. O sistema exibe a mensagem: "Nenhuma consulta com pagamento pendente encontrada".
+2. O caso de uso é encerrado.
+
+**Comprovante não anexado ou arquivo inválido:**  
+_No passo 6 ou 8 do fluxo básico, caso nenhum comprovante tenha sido anexado a uma forma de pagamento, ou o arquivo esteja em formato não permitido._
+
+1. O sistema bloqueia a gravação.
+2. O sistema exibe mensagem descritiva do problema.
+3. A **Recepcionista** corrige o anexo e o fluxo retorna ao passo 6 do fluxo básico.
+
+**Dados do convênio ausentes ou inválidos:**  
+_No passo 2 do fluxo alternativo "Pagamento via Convênio", caso operadora ou número da carteirinha estejam vazios._
+
+1. O sistema bloqueia a gravação.
+2. O sistema destaca os campos inconsistentes com mensagem descritiva.
+3. A **Recepcionista** corrige as informações e o fluxo retorna ao passo 2 do fluxo alternativo.
+
+### Requisitos Especiais:
+
+> - Na modalidade de pagamento "Particular" o sistema deve permitir mais de uma forma de pagamento e mais de um comprovante por consulta.
+
+### Condições Prévias:
+
+> - A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
+> - O paciente deve possuir consulta agendada e com pagamento pendente.
+
+### Condições Posteriores:
+
+> - O sistema exibe a mensagem: "Pagamento registrado com sucesso!".
+> - A consulta é marcada com o status de pagamento "Registrado".
+> - Comprovantes (particular) ou dados de convênio (operadora e carteirinha) ficam vinculados à consulta.
+> - O sistema deve registrar data/hora e usuário responsável pelo registro, para fins de auditoria.
