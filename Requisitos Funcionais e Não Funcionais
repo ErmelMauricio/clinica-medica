@@ -1,8 +1,9 @@
 Requisitos Funcionais e Não Funcionais 
-1. Conceitos
+Conceitos
 Requisitos funcionais (RF): descrevem as funções e os serviços que o sistema deve oferecer.
 Requisitos não funcionais (RNF): descrevem critérios de qualidade, segurança, desempenho e restrições do sistema.
-2. Cadastrar Paciente
+
+1. Cadastrar Paciente
 Ator principal: Recepcionista
 Requisitos funcionais (RF)
     • RF01 — O sistema deve permitir que a recepcionista cadastre um paciente com dados pessoais, contato e informações de convênio, quando houver.
@@ -15,7 +16,7 @@ Requisitos não funcionais (RNF)
     • RNF02 — Somente usuários autenticados e autorizados podem cadastrar ou alterar dados de pacientes.
     • RNF03 — Os dados pessoais devem ser armazenados com proteção contra acesso, alteração ou divulgação não autorizados.
     • RNF04 — As mensagens de erro devem ser claras e indicar quais campos precisam de correção.
-3. Agendar Consulta
+2. Agendar Consulta
 Atores principais: Recepcionista ou Paciente autenticado
 Requisitos funcionais (RF)
     • RF06 — O sistema deve permitir selecionar paciente, especialidade médica, médico, data e horário disponíveis.
@@ -30,7 +31,7 @@ Requisitos não funcionais (RNF)
     • RNF06 — A consulta de horários e a conclusão do agendamento devem ocorrer em tempo adequado para o uso durante o atendimento da recepção.
     • RNF07 — O acesso ao autoatendimento do paciente deve exigir autenticação; quando aplicável, deve utilizar verificação adicional, conforme descrito no trabalho original.
     • RNF08 — As operações de agendamento devem manter a integridade dos dados mesmo diante de falhas ou interrupções.
-4. Cancelar Consulta
+3. Cancelar Consulta
 Atores principais: Recepcionista ou Paciente autenticado
 Requisitos funcionais (RF)
     • RF13 — O sistema deve permitir localizar uma consulta agendada por paciente, data ou identificador da consulta.
@@ -44,7 +45,7 @@ Requisitos não funcionais (RNF)
     • RNF10 — O cancelamento deve atualizar o status e a disponibilidade do horário de forma consistente.
     • RNF11 — O sistema deve manter registro de auditoria dos cancelamentos para consulta posterior por usuários autorizados.
     • RNF12 — A confirmação e o resultado do cancelamento devem ser apresentados em mensagens claras.
-5. Registrar Atendimento Médico
+4. Registrar Atendimento Médico
 Ator principal: Médico
 Requisitos funcionais (RF)
     • RF19 — O sistema deve permitir que o médico acesse a lista de consultas previstas e selecione o paciente a atender.
@@ -58,7 +59,7 @@ Requisitos não funcionais (RNF)
     • RNF14 — O sistema deve preservar a confidencialidade, integridade e rastreabilidade das informações clínicas.
     • RNF15 — O sistema deve evitar a perda de registros confirmados e manter cópias de segurança periódicas.
     • RNF16 — A interface deve organizar os campos clínicos de forma legível, reduzindo erros de preenchimento.
-6. Registro de Pagamento ou Consulta a Convênio
+5. Registro de Pagamento ou Consulta a Convênio
 Ator principal: Recepcionista
 Requisitos funcionais (RF)
     • RF25 — O sistema deve permitir consultar a modalidade de pagamento informada no agendamento: particular ou convênio.
@@ -72,7 +73,7 @@ Requisitos não funcionais (RNF)
     • RNF18 — Os valores, datas e status financeiros devem ser armazenados com precisão e consistência.
     • RNF19 — O sistema deve manter histórico auditável das alterações nos registros de pagamento.
     • RNF20 — Se houver integração com operadora de convênio, o sistema deve informar falhas de comunicação sem indicar uma autorização que não foi confirmada.
-7. Consultar Histórico do Prontuário
+6. Consultar Histórico do Prontuário
 Ator principal: Médico
 Requisitos funcionais (RF)
     • RF31 — O sistema deve permitir localizar o prontuário de um paciente identificado.
@@ -85,7 +86,7 @@ Requisitos não funcionais (RNF)
     • RNF22 — O histórico deve ser apresentado de forma legível e organizada, com identificação clara de datas e profissionais.
     • RNF23 — A consulta deve preservar os registros originais, sem permitir alterações acidentais durante a visualização.
     • RNF24 — O sistema deve registrar acessos ao prontuário para fins de auditoria, conforme as permissões e políticas da clínica.
-8. Confirmar Consulta
+7. Confirmar Consulta
 Atores principais: Recepcionista ou Paciente autenticado
 Requisitos funcionais (RF)
     • RF36 — O sistema deve exibir as consultas agendadas que ainda aguardam confirmação.
