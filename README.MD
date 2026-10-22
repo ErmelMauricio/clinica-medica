@@ -23,5 +23,4 @@ O sistema será utilizado por três perfis de usuários: Recepcionista, Médico 
 
 O sistema pretende resolver a lentidão e desorganização decorrente de controles manuais em papel, eliminar conflitos de horários na agenda dos profissionais de saúde, evitar a perda de históricos clínicos dos pacientes e reduzir o tempo de espera no atendimento e na emissão de receitas.
 
-> ### Casos de Uso
 
