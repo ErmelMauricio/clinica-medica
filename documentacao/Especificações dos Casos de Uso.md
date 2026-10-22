@@ -464,23 +464,17 @@ _No passo 2 do fluxo básico, caso nenhum paciente corresponda à busca._
 2. O caso de uso permanece no passo 2 do fluxo básico e permite que a **Recepcionista** informe outro critério de busca ou encerre o caso de uso.
 
 **Campos obrigatórios não preenchidos ou dados inválidos:**  
-_No passo 6 do fluxo básico, caso algum campo obrigatório esteja vazio ou com formato incorreto._
+_No passo 6 do fluxo básico, caso algum campo esteja vazio ou com formato incorreto._
 1. O sistema bloqueia a gravação.
 2. O sistema destaca visualmente os campos inconsistentes com mensagem descritiva.
 3. A **Recepcionista** corrige as informações e o fluxo retorna ao passo 6 do fluxo básico.
-
-**Cadastro alterado por outra Recepcionista:**  
-_No passo 9 do fluxo básico, caso o cadastro tenha sido alterado por outra **Recepcionista** enquanto a edição estava aberta._
-1. O sistema bloqueia a gravação e informa: “Este cadastro foi alterado por outra Recepcionista”.
-2. O sistema recarrega os dados atuais do paciente.
-3. O fluxo retorna ao passo 5 do fluxo básico.
 
 **Excluir Paciente:**  
 _No passo 4 do fluxo básico, caso a **Recepcionista** selecione a opção “Excluir Paciente”._
 1. O sistema exibe um aviso de que a exclusão é permanente e remove o paciente e todos os seus dados do sistema, e solicita a senha da **Recepcionista**.
 2. A **Recepcionista** informa a sua senha e confirma a exclusão.
 3. O sistema valida a senha da **Recepcionista**.
-4. O sistema exclui permanentemente o paciente e todos os seus dados, libera os horários das consultas futuras e registra a exclusão (data, hora e **Recepcionista** responsável).
+4. O sistema exclui permanentemente o paciente e todos os seus dados, incluindo protuário, e registra a exclusão (data, hora e **Recepcionista** responsável).
 5. O sistema exibe a mensagem: “Paciente excluído com sucesso!”.
 6. O caso de uso é encerrado.
 
@@ -495,16 +489,8 @@ _Entre os passos 4 e 8 do fluxo básico, ou em qualquer passo do fluxo alternati
 2. O caso de uso é encerrado.
 
 ### Requisitos Especiais:
-> - O acesso é restrito exclusivamente à **Recepcionista**.
-> - Os dados cadastrais do paciente são: CPF, nome, WhatsApp e senha.
-> - A busca do paciente pode ser feita por CPF, nome ou número de prontuário.
-> - A senha é armazenada de forma criptografada e a **Recepcionista** nunca a visualiza. A senha é sempre digitada pelo **Paciente** e contém somente números.
-> - O sistema registra data, hora e **Recepcionista** responsável por cada alteração, guardando apenas o novo valor. Para a senha, o registro indica somente que ela foi alterada, sem armazenar o valor. Esse registro não possui visualização nem exportação.
-> - O sistema deve solicitar confirmação antes de gravar as alterações.
-> - O sistema deve garantir controle de concorrência para evitar que duas **Recepcionistas** editem o mesmo cadastro simultaneamente.
+> - Os dados cadastrais do paciente são: CPF, nome, WhatsApp e senha (todos são obrigatórios).
 > - A exclusão do paciente exige uma segunda checagem de segurança, com a senha da **Recepcionista**, e é permanente e irreversível.
-> - A exclusão remove o paciente e todos os seus dados do sistema, e os horários de consultas futuras voltam a ficar disponíveis na grade dos médicos.
-> - O paciente não é notificado das alterações realizadas.
 
 ### Condições Prévias:
 > - A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
