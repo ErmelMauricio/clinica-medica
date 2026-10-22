@@ -441,7 +441,7 @@ _Entre os passos 2 e 6 do fluxo básico, caso o **Médico** cancele a operação
 
 ## Caso de Uso 10: Editar Dados do Paciente
 
-> Permite à **Recepcionista** editar os dados cadastrais de um paciente (CPF, nome, WhatsApp e senha) ou excluir o paciente e todos os seus dados do sistema.
+> Permite à **Recepcionista** editar os dados cadastrais de um paciente (CPF, nome, WhatsApp e senha).
 
 ### Ator Principal:
 > **Recepcionista**.
@@ -450,7 +450,7 @@ _Entre os passos 2 e 6 do fluxo básico, caso o **Médico** cancele a operação
 1. A **Recepcionista** acessa a funcionalidade “Editar Dados do Paciente”.
 2. A **Recepcionista** informa o CPF, o nome ou o número de prontuário do paciente.
 3. O sistema lista os pacientes que correspondem à busca e a **Recepcionista** seleciona o paciente desejado.
-4. O sistema exibe os dados cadastrais atuais do paciente (CPF, nome e WhatsApp), com a opção de alterar a senha (a senha atual nunca é exibida) e a opção “Excluir Paciente”.
+4. O sistema exibe os dados cadastrais atuais do paciente (CPF, nome e WhatsApp), com a opção de alterar a senha (a senha atual nunca é exibida).
 5. A **Recepcionista** altera os dados desejados (CPF, nome e/ou WhatsApp). Caso o paciente deseje trocar a senha, o **Paciente** digita a nova senha (somente números) no campo próprio.
 6. A **Recepcionista** clica em “Salvar”.
 7. O sistema valida os campos e solicita confirmação: “Deseja salvar as alterações?”.
@@ -469,28 +469,13 @@ _No passo 6 do fluxo básico, caso algum campo esteja vazio ou com formato incor
 2. O sistema destaca visualmente os campos inconsistentes com mensagem descritiva.
 3. A **Recepcionista** corrige as informações e o fluxo retorna ao passo 6 do fluxo básico.
 
-**Excluir Paciente:**  
-_No passo 4 do fluxo básico, caso a **Recepcionista** selecione a opção “Excluir Paciente”._
-1. O sistema exibe um aviso de que a exclusão é permanente e remove o paciente e todos os seus dados do sistema, e solicita a senha da **Recepcionista**.
-2. A **Recepcionista** informa a sua senha e confirma a exclusão.
-3. O sistema valida a senha da **Recepcionista**.
-4. O sistema exclui permanentemente o paciente e todos os seus dados, incluindo protuário, e registra a exclusão (data, hora e **Recepcionista** responsável).
-5. O sistema exibe a mensagem: “Paciente excluído com sucesso!”.
-6. O caso de uso é encerrado.
-
-**Senha da Recepcionista incorreta:**  
-_No passo 3 do fluxo alternativo “Excluir Paciente”, caso a senha informada não corresponda à da **Recepcionista** autenticada._
-1. O sistema informa: “Senha incorreta” e não realiza a exclusão.
-2. A **Recepcionista** pode informar a senha novamente (retorna ao passo 2 do fluxo alternativo “Excluir Paciente”) ou desistir.
-
 **Desistência:**  
-_Entre os passos 4 e 8 do fluxo básico, ou em qualquer passo do fluxo alternativo “Excluir Paciente”, caso a **Recepcionista** cancele a operação ou não confirme._
+_Entre os passos 4 e 8 do fluxo básico caso a **Recepcionista** cancele a operação ou não confirme._
 1. O sistema descarta as alterações informadas e mantém os dados do paciente sem alteração.
 2. O caso de uso é encerrado.
 
 ### Requisitos Especiais:
 > - Os dados cadastrais do paciente são: CPF, nome, WhatsApp e senha (todos são obrigatórios).
-> - A exclusão do paciente exige uma segunda checagem de segurança, com a senha da **Recepcionista**, e é permanente e irreversível.
 
 ### Condições Prévias:
 > - A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
@@ -498,13 +483,15 @@ _Entre os passos 4 e 8 do fluxo básico, ou em qualquer passo do fluxo alternati
 
 ### Condições Posteriores:
 > - Edição: os dados alterados ficam gravados, as alterações são registradas (data, hora e **Recepcionista**) e o sistema exibe a mensagem “Dados do paciente atualizados com sucesso!”.
-> - Exclusão: o paciente e todos os seus dados são removidos, os horários das consultas futuras ficam disponíveis e o sistema exibe a mensagem “Paciente excluído com sucesso!”.
 
 ---
 
 ## Análise das Relações entre Casos de Uso
 
-### Consultar Histórico do Prontuário ```<<include>>``` Registrar Atendimento Médico:
+### Cadastrar Paciente ```<<extend>>``` Agendar Consulta
+> Ao Agendar Consulta, caso o CPF informado não pertença a um paciente cadastrado, então o sistema oferece executar o caso de uso Cadastrar Paciente.
+
+### Registrar Atendimento Médico ```<<include>>``` Consultar Histórico do Prontuário:
 > Sempre que o médico inicia uma Registro de atendimento médico o histórico do prontuário daquele paciente já é exibido automaticamente.
 
 ### Cancelar Consulta ```<<extend>>``` Lembrete de Consulta via WhatsApp:
