@@ -246,8 +246,82 @@ _Entre os passos 4 e 8 do fluxo básico caso a **Recepcionista** cancele a opera
 
 ## Caso de Uso 6: Cadastrar Médico
 
+> Permite à **Recepcionista** registrar os dados profissionais (nome, CRM, UF do CRM, especialidade e horários de atendimento) de um novo médico no sistema, para que sua agenda fique disponível para agendamento de consultas.
+
+### Ator Principal:
+> **Recepcionista**.
+
+### Fluxo Básico:
+1. A **Recepcionista** acessa a opção "Novo Cadastro de Médico".
+2. O sistema apresenta o formulário de cadastro solicitando os dados do médico.
+3. A **Recepcionista** preenche os dados solicitados (nome, CRM, UF do CRM, especialidade, dias da semana e horários de atendimento e duração de cada consulta) e clica em "Salvar".
+4. O sistema valida a consistência de todos os campos obrigatórios e verifica se o CRM informado já está cadastrado.
+5. O sistema armazena os dados do médico no banco de dados e gera a grade de horários do médico, com todos os horários inicialmente disponíveis.
+
+### Fluxos Alternativos:
+**CRM já cadastrado no sistema:**
+*No passo 4 do fluxo básico, caso o sistema identifique que o CRM e a UF informados já pertencem a outro médico cadastrado.*
+1. O sistema exibe a mensagem de erro: "CRM já cadastrado no sistema".
+2. O sistema oferece a opção de corrigir os dados informados ou cancelar a operação.
+3. Se a **Recepcionista** escolher corrigir, o fluxo retorna ao passo 3 do fluxo básico. Se escolher cancelar, o caso de uso é encerrado.
+
+**Campos obrigatórios não preenchidos ou dados inválidos:**
+*No passo 3 do fluxo básico, caso algum campo obrigatório esteja vazio ou com formato incorreto (por exemplo, horário final de atendimento anterior ao horário inicial).*
+1. O sistema bloqueia a gravação.
+2. O sistema destaca visualmente os campos inconsistentes com mensagem descritiva.
+3. A **Recepcionista** corrige as informações e o fluxo segue para o passo 4 do fluxo básico.
+
+### Requisitos Especiais:
+> - O tempo de resposta para validação de unicidade do CRM deve ser inferior a 2 segundos.
+> - Os dados cadastrais do médico são: nome, CRM, UF do CRM, especialidade e horários de atendimento (todos são obrigatórios).
+> - O sistema deve registrar a data/hora e a **Recepcionista** responsável pelo cadastro, para fins de auditoria.
+
+### Condições Prévias:
+> A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
+
+### Condições Posteriores:
+> - O sistema exibe a mensagem: "Médico cadastrado com sucesso!".
+> - O médico passa a ser listado na especialidade correspondente, e seus horários passam a ficar disponíveis para os casos de uso "Agendar Consulta" e "Consultar Agenda Médica".
+
 ---
 ## Caso de Uso 7: Consultar Agenda Médica
+
+> Permite à **Recepcionista** ou ao **Médico** visualizar a agenda de um médico em uma data, com os horários disponíveis e os horários ocupados por consultas agendadas.
+
+### Atores Principais:
+> **Recepcionista** ou **Médico**.
+
+### Fluxo Básico:
+1. O ator acessa a funcionalidade "Consultar Agenda Médica".
+2. O sistema apresenta os filtros de consulta: especialidade, médico e data (por padrão, a data atual). Caso o ator seja um **Médico**, o sistema já preenche o filtro com o próprio médico, sem permitir alteração.
+3. O ator seleciona a especialidade, o médico e a data desejados e clica em "Consultar".
+4. O sistema exibe a grade de horários do médico na data selecionada, em ordem crescente de horário, indicando cada horário como "Disponível" ou "Agendado".
+5. Para os horários "Agendado", o sistema exibe o nome do paciente e a modalidade de pagamento (Particular ou Convênio).
+6. O ator consulta a agenda e encerra o caso de uso, ou altera a data para consultar outro dia (o fluxo retorna ao passo 4 do fluxo básico).
+
+### Fluxos Alternativos:
+**Nenhum médico cadastrado para a especialidade:**
+*No passo 3 do fluxo básico, caso a especialidade selecionada não possua médicos cadastrados.*
+1. O sistema exibe a mensagem: "Nenhum médico cadastrado para a especialidade selecionada".
+2. O fluxo retorna ao passo 3 do fluxo básico, permitindo que o ator escolha outra especialidade.
+
+**Médico sem atendimento na data selecionada:**
+*No passo 4 do fluxo básico, caso o médico não possua horários de atendimento na data selecionada.*
+1. O sistema exibe a mensagem: "O médico não atende na data selecionada".
+2. O fluxo retorna ao passo 3 do fluxo básico, permitindo que o ator escolha outra data ou outro médico.
+
+### Requisitos Especiais:
+> - Este caso de uso é somente de consulta: nenhum dado da agenda é alterado.
+> - O **Médico** só pode consultar a própria agenda.
+> - O sistema deve exibir a agenda atualizada, refletindo agendamentos e cancelamentos feitos até o momento da consulta.
+
+### Condições Prévias:
+> - O ator deve estar autenticado no sistema com credenciais ativas.
+> - O médico consultado deve estar cadastrado no sistema, com horários de atendimento definidos.
+
+### Condições Posteriores:
+> - O sistema exibe a grade de horários do médico na data selecionada.
+> - Nenhum dado do sistema é alterado.
 
 ---
 
