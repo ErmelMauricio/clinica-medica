@@ -49,38 +49,33 @@
 ---
 ## Caso de Uso 2: Agendar Consulta
 
->Permite à **Recepcionista** ou ao **Paciente** marcar uma consulta médica, selecionando a especialidade, o médico, a data e o horário desejado dentre os disponíveis na agenda. 
+>Permite à **Recepcionista** marcar uma consulta médica para um paciente, selecionando a especialidade, o médico, a data e o horário desejado dentre os disponíveis na agenda. 
 
-### Atores Principais:
->**Recepcionista** ou **Paciente** via autoatendimento.
+### Ator Principal:
+>**Recepcionista**.
 
 ### Fluxo Básico:
-1. O ator acessa a funcionalidade "Agendar Consulta".
-2. O ator localiza o paciente informando o CPF (caso o ator seja um **Paciente**, então precisará ser feito uma autenticação multifator via WhatsApp).
+1. A **Recepcionista** acessa a funcionalidade "Agendar Consulta".
+2. A **Recepcionista** localiza o paciente informando o CPF.
 3. O sistema recupera e exibe os dados do paciente.
-4. O ator seleciona a especialidade médica e o médico desejado (existe a opção de não selecionar um médico, assim os horários mostrados são para todos os médicos daquela especialidade.
+4. A **Recepcionista** seleciona a especialidade médica e o médico desejado (existe a opção de não selecionar um médico, assim os horários mostrados são para todos os médicos daquela especialidade.
 5. O sistema mostra os horários disponíveis baseado nos filtros selecionados.
-6. O ator seleciona a data e o horário pretendido na grade apresentada.
-7. O ator seleciona a modalidade de pagamento (Particular ou Convênio).
-8. O ator clica em "Confirmar Agendamento".
+6. A **Recepcionista** seleciona a data e o horário pretendido na grade apresentada.
+7. A **Recepcionista** seleciona a modalidade de pagamento (Particular ou Convênio).
+8. A **Recepcionista** clica em "Confirmar Agendamento".
 
 ### Fluxos Alternativos:
-**Paciente não cadastrado no sistema (para Recepcionista):**
+**Paciente não cadastrado no sistema:**
 *No passo 2 do fluxo básico, caso o paciente não seja localizado pelo CPF.*
 1. O sistema informa: "Paciente não localizado".
 2. O sistema oferece o redirecionamento imediato para o caso de uso "Cadastrar Paciente".
- 
-**Paciente não cadastrado no sistema (para Paciente):**
-*No passo 2 do fluxo básico, caso o paciente não seja localizado pelo CPF.*
-1. O sistema informa: "Paciente não localizado".
-2. O sistema indica que o **Paciente** contate a **Recepcionista** para realizar o cadastro.
 
 ### Requisitos Especiais:
->- O sistema deve garantir controle de concorrência para evitar que dois atores agendem o mesmo horário simultaneamente.
->- O sistema deve registrar a data/hora e o usuário responsável pelo agendamento para fins de auditoria.
+>- O sistema deve garantir controle de concorrência para evitar que duas **Recepcionistas** agendem o mesmo horário simultaneamente.
+>- O sistema deve registrar a data/hora e a **Recepcionista** responsável pelo agendamento para fins de auditoria.
 
 ### Condições Prévias:
->O ator deve estar autenticado no sistema com credenciais ativas.
+>A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
 
 ### Condições Posteriores:
 >- O sistema exibe a mensagem: “Consulta agendada com sucesso”, junto da informação de data, hora e nome do médico.
@@ -89,7 +84,7 @@
 ---
 ## Caso de Uso 3: Lembrete de Consulta via WhatsApp
 
-> Permite à **Recepcionista** consultar as consultas agendadas para as próximas 48 horas e enviar ao **Paciente** um lembrete via WhatsApp, a partir de uma mensagem padrão que contém o link para cancelar a consulta.
+> Permite à **Recepcionista** consultar as consultas agendadas para as próximas 48 horas e enviar ao **Paciente** um lembrete via WhatsApp, a partir de uma mensagem padrão.
 
 ### Ator Principal:
 > **Recepcionista**.
@@ -98,14 +93,13 @@
 1. A **Recepcionista** acessa a funcionalidade “Lembretes de Consulta”.
 2. O sistema exibe as consultas com o status “Agendada” (não canceladas) para as próximas 48 horas, da mais próxima para a mais distante, e que ainda não tiveram o lembrete enviado.
 3. A **Recepcionista** clica na consulta desejada.
-4. O sistema monta a mensagem padrão (abaixo) com os dados da consulta e o link para cancelamento.
+4. O sistema monta a mensagem padrão (abaixo) com os dados da consulta.
 5. O sistema abre o aplicativo WhatsApp no dispositivo da **Recepcionista**, na conversa com o número de WhatsApp cadastrado do paciente, com a mensagem já preenchida.
 6. O sistema altera o status do lembrete da consulta para “Lembrete enviado”, registrando data, hora e **Recepcionista** responsável, e remove a consulta da lista principal.
 
 #### Mensagem Padrão:
 > [NOME DO PACIENTE], você possui uma consulta agendada com [NOME DO MÉDICO] [ESPECIALIDADE DO MÉDICO] em [DATA E HORA DA CONSULTA AGENDADA].  
-> Caso você não possa comparecer, por favor, cancele o agendamento pelo link:  
-> [LINK PARA CANCELAR A CONSULTA]  
+> Caso você não possa comparecer, por favor, entre em contato com a clínica para cancelar o agendamento.  
 > Se você for comparecer, não precisa fazer nada. Seu médico estará te aguardando.
 
 ### Fluxos Alternativos:
@@ -136,35 +130,26 @@ _No passo 4 do fluxo básico, caso o paciente não possua número de WhatsApp ca
 ### Condições Posteriores:
 > - A consulta fica com o status “Lembrete enviado” (data, hora e **Recepcionista**) e deixa de aparecer na lista principal.
 
-### Ponto de Extensão:
-> - **Caso de Uso Estendido: Cancelar Consulta:**  
-> 	   *Ocorre apenas se o **Paciente** clicar no link da mensagem para cancelar a consulta.*
-
 ---
 
 ## Caso de Uso 4: Cancelar Consulta
 
-> Permite à **Recepcionista** ou ao **Paciente** cancelar uma consulta agendada, liberando o horário na agenda do médico para novos agendamentos.
+> Permite à **Recepcionista** cancelar uma consulta agendada, liberando o horário na agenda do médico para novos agendamentos.
 
-### Atores Principais:
-> **Recepcionista** ou **Paciente** via autoatendimento.
+### Ator Principal:
+> **Recepcionista**.
 
 ### Fluxo Básico:
-1. O ator acessa a funcionalidade "Cancelar Consulta".
-2. O ator localiza o paciente informando o CPF (caso o ator seja um **Paciente**, será necessária autenticação multifator via WhatsApp).
+1. A **Recepcionista** acessa a funcionalidade "Cancelar Consulta".
+2. A **Recepcionista** localiza o paciente informando o CPF.
 3. O sistema exibe as consultas futuras do paciente que não foram canceladas.
-4. O ator seleciona a consulta a ser cancelada.
+4. A **Recepcionista** seleciona a consulta a ser cancelada.
 5. O sistema exibe os dados da consulta (médico, data, hora) e solicita confirmação, informando que o horário voltará a ficar disponível para outro paciente.
-6. O ator confirma o cancelamento.
-7. O sistema altera o status da consulta para "Cancelada", marca o horário como disponível na grade do médico e registra data, hora e usuário responsável pelo cancelamento.
+6. A **Recepcionista** confirma o cancelamento.
+7. O sistema altera o status da consulta para "Cancelada", marca o horário como disponível na grade do médico e registra data, hora e **Recepcionista** responsável pelo cancelamento.
 8. O sistema exibe a mensagem: "Consulta cancelada com sucesso! Acesso o menu 'Agendar Consulta' para fazer novo agendamento".
 
 ### Fluxos Alternativos:
-**Cancelamento originado no WhatsApp:**  
-_No passo 1 do fluxo básico, caso o caso de uso seja acionado pelo caso de uso "Lembrete de Consulta via WhatsApp" após o **Paciente** clicar no link enviado via WhatsApp._
-1. Como o paciente já é originado do WhatsApp, nao se faz necessária a autenticação multifator tampouco a seleção de qual consulta deve ser desmarcada, portanto os passos 1 a 4 do fluxo básico são dispensados.
-2. O fluxo segue a partir do passo 5 do fluxo básico.
-
 **Paciente não localizado:**  
 _No passo 2 do fluxo básico, caso o paciente não seja localizado pelo CPF._
 1. O sistema informa: "Paciente não localizado".
@@ -176,7 +161,7 @@ _No passo 3 do fluxo básico, caso o paciente não possua consultas futuras ativ
 2. O caso de uso é encerrado.
 
 **Desistência do cancelamento:**  
-_No passo 6 do fluxo básico, caso o ator opte por não confirmar._
+_No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 1. O sistema mantém a consulta sem alteração.
 2. O caso de uso é encerrado.
 
@@ -184,10 +169,10 @@ _No passo 6 do fluxo básico, caso o ator opte por não confirmar._
 > - Somente consultas futuras agendadas e que ainda não foram canceladas podem ser canceladas.
 > - A consulta cancelada não é excluída do sistema; permanece com o status "Cancelada" para fins de histórico.
 > - Uma consulta cancelada não pode ser reativada; um novo agendamento deve ser feito pelo caso de uso "Agendar Consulta" ou por telefone (fora do sistema).
-> - O sistema deve registrar a data/hora, o usuário responsável pelo cancelamento para fins de auditoria.
+> - O sistema deve registrar a data/hora e a **Recepcionista** responsável pelo cancelamento para fins de auditoria.
 
 ### Condições Prévias:
-> - O ator deve estar autenticado no sistema com credenciais ativas (quando o acesso ao caso de uso "Cancelar Consulta" for feito via caso de uso "Lembrete de Consulta via WhatsApp" a autenticação multifator não se faz necessária).
+> - A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
 > - O paciente deve possuir consulta futura agendada e que ainda não foi cancelada.
 
 ### Condições Posteriores:
@@ -286,37 +271,36 @@ _Entre os passos 4 e 8 do fluxo básico caso a **Recepcionista** cancele a opera
 ---
 ## Caso de Uso 7: Consultar Agenda Médica
 
-> Permite à **Recepcionista** ou ao **Médico** visualizar a agenda de um médico em uma data, com os horários disponíveis e os horários ocupados por consultas agendadas.
+> Permite à **Recepcionista** visualizar a agenda de um médico em uma data, com os horários disponíveis e os horários ocupados por consultas agendadas.
 
-### Atores Principais:
-> **Recepcionista** ou **Médico**.
+### Ator Principal:
+> **Recepcionista**.
 
 ### Fluxo Básico:
-1. O ator acessa a funcionalidade "Consultar Agenda Médica".
-2. O sistema apresenta os filtros de consulta: especialidade, médico e data (por padrão, a data atual). Caso o ator seja um **Médico**, o sistema já preenche o filtro com o próprio médico, sem permitir alteração.
-3. O ator seleciona a especialidade, o médico e a data desejados e clica em "Consultar".
+1. A **Recepcionista** acessa a funcionalidade "Consultar Agenda Médica".
+2. O sistema apresenta os filtros de consulta: especialidade, médico e data (por padrão, a data atual).
+3. A **Recepcionista** seleciona a especialidade, o médico e a data desejados e clica em "Consultar".
 4. O sistema exibe a grade de horários do médico na data selecionada, em ordem crescente de horário, indicando cada horário como "Disponível" ou "Agendado".
 5. Para os horários "Agendado", o sistema exibe o nome do paciente e a modalidade de pagamento (Particular ou Convênio).
-6. O ator consulta a agenda e encerra o caso de uso, ou altera a data para consultar outro dia (o fluxo retorna ao passo 4 do fluxo básico).
+6. A **Recepcionista** consulta a agenda e encerra o caso de uso, ou altera a data para consultar outro dia (o fluxo retorna ao passo 4 do fluxo básico).
 
 ### Fluxos Alternativos:
 **Nenhum médico cadastrado para a especialidade:**
 *No passo 3 do fluxo básico, caso a especialidade selecionada não possua médicos cadastrados.*
 1. O sistema exibe a mensagem: "Nenhum médico cadastrado para a especialidade selecionada".
-2. O fluxo retorna ao passo 3 do fluxo básico, permitindo que o ator escolha outra especialidade.
+2. O fluxo retorna ao passo 3 do fluxo básico, permitindo que a **Recepcionista** escolha outra especialidade.
 
 **Médico sem atendimento na data selecionada:**
 *No passo 4 do fluxo básico, caso o médico não possua horários de atendimento na data selecionada.*
 1. O sistema exibe a mensagem: "O médico não atende na data selecionada".
-2. O fluxo retorna ao passo 3 do fluxo básico, permitindo que o ator escolha outra data ou outro médico.
+2. O fluxo retorna ao passo 3 do fluxo básico, permitindo que a **Recepcionista** escolha outra data ou outro médico.
 
 ### Requisitos Especiais:
 > - Este caso de uso é somente de consulta: nenhum dado da agenda é alterado.
-> - O **Médico** só pode consultar a própria agenda.
 > - O sistema deve exibir a agenda atualizada, refletindo agendamentos e cancelamentos feitos até o momento da consulta.
 
 ### Condições Prévias:
-> - O ator deve estar autenticado no sistema com credenciais ativas.
+> - A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
 > - O médico consultado deve estar cadastrado no sistema, com horários de atendimento definidos.
 
 ### Condições Posteriores:
@@ -329,15 +313,6 @@ _Entre os passos 4 e 8 do fluxo básico caso a **Recepcionista** cancele a opera
 
 ### Cadastrar Paciente ```<<extend>>``` Agendar Consulta
 > Ao Agendar Consulta, caso o CPF informado não pertença a um paciente cadastrado, então o sistema oferece executar o caso de uso Cadastrar Paciente.
-
-### Registrar Atendimento Médico ```<<include>>``` Consultar Histórico do Prontuário:
-> Sempre que o médico inicia uma Registro de atendimento médico o histórico do prontuário daquele paciente já é exibido automaticamente.
-
-### Cancelar Consulta ```<<extend>>``` Lembrete de Consulta via WhatsApp:
-> No Lembrete de Consulta via WhatsApp é informado o link para que o usuário cancele a consulta, o link inicia o caso de uso Cancelar Consulta.
-
-### Emitir Prescrição Médica ```<<extend>>``` Registrar Atendimento Médico:
-> Durante uma consulta o médico irá obrigatoriamente "Registrar Atendimento Médico", enquanto faz o registro o médico "Emitir Prescrição Médica".
 
 ### Editar Dados do Paciente ```<<extend>>``` Cadastrar Paciente:
 > Durante o cadastro de um novo Paciente, se o CPF utilizado no cadastro já pertence a outro paciente cadastrado, o sistema oferece a opção de seguir até o caso de uso Editar Dados do Paciente.
