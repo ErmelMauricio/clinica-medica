@@ -6,35 +6,59 @@ Requisitos não funcionais (RNF): descrevem critérios de qualidade, segurança,
 1. Cadastrar Paciente
 Ator principal: Recepcionista
 Requisitos funcionais (RF)
-    • RF01 — O sistema deve permitir que a recepcionista cadastre um paciente com dados pessoais CPF, Nome, endereço e sexo , contato e informações de convênio, quando houver.
-    • RF02 — O sistema deve validar os campos obrigatórios e o formato dos dados informados.
-    • RF03 — O sistema deve confirmar o sucesso do cadastro e permitir a atualização dos dados de um paciente existente
+    • RF01 O sistema deve permitir que a recepcionista cadastre um paciente com dados pessoais CPF, Nome, endereço e sexo , contato e informações de convênio, quando houver.
+    • RF02 O sistema deve validar os campos obrigatórios e o formato dos dados informados.
+    • RF03 O sistema deve confirmar o sucesso do cadastro e permitir a atualização dos dados de um paciente existente
 
 2. Agendar Consulta
 Atores principais: Recepcionista 
 Requisitos funcionais (RF)
-    • RF04 — O sistema deve permitir selecionar paciente, especialidade médica, médico, data e horário disponíveis.
-    • RF05 — O sistema deve consultar a agenda e exibir os horários disponíveis para o médico selecionado.
-    • RF06 — O sistema deve impedir que duas consultas sejam marcadas para o mesmo médico no mesmo horário.
+    • RF04 O sistema deve permitir selecionar paciente, especialidade médica, médico, data e horário disponíveis.
+    • RF05 O sistema deve consultar a agenda e exibir os horários disponíveis para o médico selecionado.
+    • RF06 O sistema deve impedir que duas consultas sejam marcadas para o mesmo médico no mesmo horário.
     
 3. Cancelar Consulta
 Atores principais: Recepcionista
 Requisitos funcionais (RF)
-    • RF7 — O sistema deve permitir localizar uma consulta agendada por paciente, data ou identificador da consulta.
-    • RF8 — O sistema deve permitir que a recepcionista cancele uma consulta e que o paciente solicite o cancelamento de suas próprias consultas.
-    • RF9 — Antes de concluir o cancelamento, o sistema deve solicitar confirmação da ação.
-    • RF10 — Após o cancelamento, o sistema deve atualizar o status da consulta para “Cancelada”.
-    • RF11 — O sistema deve liberar o horário cancelado na agenda do médico.
+    • RF07 O sistema deve permitir localizar uma consulta agendada por paciente, data ou identificador da consulta.
+    • RF08 O sistema deve permitir que a recepcionista cancele uma consulta e que o paciente solicite o cancelamento de suas próprias consultas.
+    • RF09 Antes de concluir o cancelamento, o sistema deve solicitar confirmação da ação.
+    • RF10 Após o cancelamento, o sistema deve atualizar o status da consulta para “Cancelada”.
+    • RF11 O sistema deve liberar o horário cancelado na agenda do médico.
     
 4.Lembrente de whassapp
 Atores principais: Recepcionista
 Requisitos funcionais (RF)
-    • RF12 — O sistema deve exibir as consultas agendadas que ainda aguardam confirmação.
-    • RF13 — O sistema deve permitir confirmar uma consulta selecionada, após verificar a identidade do usuário e sua permissão.
-    • RF14 — O sistema deve atualizar o status da consulta para “Confirmada”.
-    • RF15 — O sistema deve apresentar ao usuário a data, o horário, o médico e o resultado da confirmação.
-    • RF16 — O sistema deve impedir a confirmação de consultas inexistentes, canceladas ou já realizadas.
+    • RF12 O sistema deve exibir as consultas agendadas que ainda aguardam confirmação.
+    • RF13 O sistema deve permitir confirmar uma consulta selecionada, após verificar a identidade do usuário e sua permissão.
+    • RF14 O sistema deve atualizar o status da consulta para “Confirmada”.
+    • RF15 O sistema deve apresentar ao usuário a data, o horário, o médico e o resultado da confirmação.
+    • RF16 O sistema deve impedir a confirmação de consultas inexistentes, canceladas ou já realizadas.
 
+5.Editar Dados do Paciente
+Atores principais: Recepcionista
+Requisitos funcionais (RF)
+    • RF17 O sistema deve permitir localiza o paciente pelo CPF e nome.
+    • RF18 O sistema deve permitir alterar informações do paciente, como nome, endereço, telefone e e-mail.
+    • RF19 O sistema deve validar os campos obrigatórios antes de salvar as alterações.
+    • RF20 O sistema deve registrar a data da alteração realizada no sistema.
+   
+6.Cadastrar Médico
+Atores principais: Recepcionista
+Requisitos funcionais (RF)
+    • RF21 O sistema deve permitir cadastrar médicos, incluindo nome, CRM, especialidade, telefone e e-mail.
+    • RF22 O sistema deve validar o preenchimento dos campos obrigatórios no cadastro do Médico.
+    • RF23 O sistema deve permitir consultar os dados de cada médico cadastrado.
+    • RF24 O sistema deve permitir editar e atualizar os dados dos Médicos cadastrados.
+
+7.Consultar Agenda Médica
+Atores principais: Recepcionista
+Requisitos funcionais (RF)
+    • RF25 O sistema deve permitir consultar a agenda de consultas por Médico e data.
+    • RF26 O sistema deve exibir os horarios disponiveis e os ocupados.
+    • RF27 O sistema deve permitir que a recepcionista visualize os agendamentos dos pacientes.
+    • RF28 O sistema deve permitir que o Médico consulte sua propria agenda na clinica. 
+  
 > - Cadastrar Paciente
 > - Agendar Consulta / Cancelar Consulta
 > - Confirmar consulta
@@ -42,32 +66,52 @@ Requisitos funcionais (RF)
 1. Cadastrar Paciente
 Ator principal: Recepcionista
 Requisitos não funcionais (RNF)
-    • RNF01 — A validação de unicidade do CPF deve responder em menos de 2 segundos, conforme especificado no trabalho original.
-    • RNF02 — Somente usuários autenticados e autorizados podem cadastrar ou alterar dados de pacientes.
-    • RNF03 — Os dados pessoais devem ser armazenados com proteção contra acesso, alteração ou divulgação não autorizados.
-    • RNF04 — As mensagens de erro devem ser claras e indicar quais campos precisam de correção.
+    • RNF01 A validação de unicidade do CPF deve responder em menos de 2 segundos, conforme especificado no trabalho original.
+    • RNF02 Somente usuários autenticados e autorizados podem cadastrar ou alterar dados de pacientes.
+    • RNF03 Os dados pessoais devem ser armazenados com proteção contra acesso, alteração ou divulgação não autorizados.
+    • RNF04 As mensagens de erro devem ser claras e indicar quais campos precisam de correção.
 
 2. Agendar Consulta
 Atores principais: Recepcionista
 Requisitos não funcionais (RNF)
-    • RNF05 — O controle de concorrência deve impedir conflitos de agenda mesmo quando usuários tentarem reservar o mesmo horário simultaneamente.
-    • RNF06 — A consulta de horários e a conclusão do agendamento devem ocorrer em tempo adequado para o uso durante o atendimento da recepção.
-    • RNF07 — O acesso ao autoatendimento do paciente deve exigir autenticação; quando aplicável, deve utilizar verificação adicional, conforme descrito no trabalho original.
-    • RNF08 — As operações de agendamento devem manter a integridade dos dados mesmo diante de falhas ou interrupções.
+    • RNF05 O controle de concorrência deve impedir conflitos de agenda mesmo quando usuários tentarem reservar o mesmo horário simultaneamente.
+    • RNF06 A consulta de horários e a conclusão do agendamento devem ocorrer em tempo adequado para o uso durante o atendimento da recepção.
+    • RNF07 O acesso ao autoatendimento do paciente deve exigir autenticação; quando aplicável, deve utilizar verificação adicional, conforme descrito no trabalho original.
+    • RNF08 As operações de agendamento devem manter a integridade dos dados mesmo diante de falhas ou interrupções.
 
 3. Cancelar Consulta
 Atores principais: Recepcionista
 Requisitos não funcionais (RNF)
    Requisitos não funcionais (RNF)
-    • RNF09 — O sistema deve impedir que pacientes cancelem consultas pertencentes a outras pessoas.
-    • RNF10 — O cancelamento deve atualizar o status e a disponibilidade do horário de forma consistente.
-    • RNF11 — O sistema deve manter registro de auditoria dos cancelamentos para consulta posterior por usuários autorizados.
-    • RNF12 — A confirmação e o resultado do cancelamento devem ser apresentados em mensagens claras.
+    • RNF09 O sistema deve impedir que pacientes cancelem consultas pertencentes a outras pessoas.
+    • RNF10 O cancelamento deve atualizar o status e a disponibilidade do horário de forma consistente.
+    • RNF11 O sistema deve manter registro de auditoria dos cancelamentos para consulta posterior por usuários autorizados.
+    • RNF12 A confirmação e o resultado do cancelamento devem ser apresentados em mensagens claras.
 
-4.Confirmar Consulta
+4.Lembrente de whassapp
 Atores principais: Recepcionista
 Requisitos não funcionais (RNF)
-    • RNF25 — O sistema deve permitir que somente o paciente relacionado à consulta ou um funcionário autorizado realize a confirmação.
-    • RNF26 — A atualização do status deve ser consistente e refletida na agenda sem criar duplicidade de consultas.
-    • RNF27 — A confirmação deve produzir retorno claro ao usuário após a conclusão da operação.
-    • RNF28 — Os registros de confirmação devem ser protegidos contra alteração não autorizada e estar disponíveis para auditoria.
+    • RNF13 O sistema deve enviar os lembretes de consultas pelo whatsapp de forma segura e proteger os dados pessoais dos pacientes.
+    • RNF14 O sistema deve processar o envio dos lembretes em ate 5 segundos depois a solicitação, desconsiderando o tempo de resposta do whatsapp. .
+    • RNF15 O sistema deve registrar o status de envio dos lembretes, permitindo identificar as mensagens enviadas, entregues ou com falha, conforme os dados disponibilizados pelo whatsapp.
+
+5.Editar Dados do Paciente
+Atores principais: Recepcionista
+Requisitos não funcionais (RNF)
+    • RF16 O sistema deve salvar as alterações em até 3 segundos.
+    • RF17 O sistema deve exigir autenticação para permitir a edição dos dados dos pacientes.
+    • RF18 O sistema deve manter um registro das alterações feitas e identificar a data feita.
+   
+6.Cadastrar Médico
+Atores principais: Recepcionista
+Requisitos não funcionais (RNF)
+    • RF19 O sistema deve exigir autenticação para permitir o cadastro dos Médicos.
+    • RF20 O sistema deve salvar as alterações em até 3 segundos.
+    • RF21 O sistema deve proteger os dados pessoais de cada médico cadastrado contra acessos não autorizados.
+    
+7.Consultar Agenda Médica
+Atores principais: Recepcionista
+Requisitos não funcionais (RNF)
+    • RF22 O sistema deve permitir acesso a agenda conforme o perfil de cada usuario.
+    • RF23 O sistema deve apresentar os resultados da consulta da agenda em até 3 segundos.
+    • RF24 O sistema deve estar disponivel durante o harario de funcionamento da clinica, conforme a disponibilidade definida.
