@@ -240,7 +240,7 @@ _No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 2. O sistema apresenta o formulário de cadastro solicitando os dados do médico.
 3. A **Recepcionista** preenche os dados solicitados (nome, CRM, UF do CRM, especialidade, dias da semana e horários de atendimento e duração de cada consulta) e clica em "Salvar".
 4. O sistema valida a consistência de todos os campos obrigatórios e verifica se o CRM informado já está cadastrado.
-5. O sistema armazena os dados do médico no banco de dados e gera a grade de horários do médico.
+5. O sistema armazena os dados do médico no banco de dados gerando assim a agenda do médico.
 
 ### Fluxos Alternativos:
 **CRM já cadastrado no sistema:**
@@ -270,7 +270,7 @@ _No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 ---
 ## Caso de Uso 7: Alterar Agenda Médica
 
-> Permite à **Recepcionista** registrar ausências ou novos horários disponíveis na agenda de um médico (dias ou intervalos de horário em que ele não atenderá, ou que passará a atender), informadas formalmente pelo médico fora do sistema, bloqueando ou disponibilizando esses horários para novos agendamentos. Também permite remover ausências registradas.
+> Permite à **Recepcionista** registrar ausências na agenda de um médico (dias ou intervalos de horário em que ele não atenderá, ou que passará a atender), informadas formalmente pelo médico fora do sistema, bloqueando esses horários para novos agendamentos. Também permite remover ausências registradas.
 
 ### Ator Principal:
 > **Recepcionista**.
@@ -279,8 +279,8 @@ _No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 1. A **Recepcionista** acessa a funcionalidade “Alterar Agenda Médica”.
 2. A **Recepcionista** informa o nome do médico.
 3. O sistema lista os médicos que correspondem à busca (nome, especialidade e CRM) e a **Recepcionista** seleciona o médico desejado.
-4. O sistema exibe os dados do médico, as ausências futuras já registradas (com a opção “Remover”), o formulário para registrar nova ausência e a opção “Adicionar horários de atendimento”.
-5. A **Recepcionista** informa o motivo da ausência e adiciona um ou mais períodos. Para cada período, informa a data inicial e a data final (a mesma data, no caso de um único dia) e define se é o dia inteiro ou um intervalo de horário (hora inicial e hora final). Opcionalmente, marca a opção “Permanente” no período, alterando assim permanentemente a agenda daquele médico.
+4. O sistema exibe os dados do médico, as ausências futuras já registradas, o formulário para registrar nova ausência.
+5. A **Recepcionista** informa o motivo da ausência e seleciona o(s) dia(s) e horário(s) que o médico se ausentará por aquele motivo. Para cada período, informa a data inicial e a data final (a mesma data, no caso de um único dia) e define se é o dia inteiro ou um intervalo de horário (hora inicial e hora final). 
 6. A **Recepcionista** clica em “Registrar Ausência”.
 7. O sistema valida os campos informados.
 8. O sistema verifica se existe consulta agendada em algum horário abrangido pelos períodos informados.
@@ -306,34 +306,8 @@ _No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 2. O sistema exibe uma mensagem informando as datas e os horários das consultas em conflito.
 3. A **Recepcionista** ajusta os períodos (o fluxo retorna ao passo 5 do fluxo básico) ou encerra o caso de uso para cancelar as consultas pelo caso de uso “Cancelar Consulta” e repetir o registro depois.
 
-**Remover ausência:**  
-*No passo 4 do fluxo básico, caso a **Recepcionista** selecione a opção “Remover” em uma ausência registrada.*
-1. O sistema exibe os dados da ausência (período, horário e motivo) e solicita confirmação: “Deseja remover esta ausência? Os horários voltarão a ficar disponíveis para agendamento.”.
-2. A **Recepcionista** confirma a remoção.
-3. O sistema remove a ausência, marca como disponíveis os horários futuros da agenda do médico antes bloqueados por ela e registra data, hora e **Recepcionista** responsável pela alteração.
-4. O sistema exibe a mensagem: “Ausência removida com sucesso!”.
-5. O caso de uso é encerrado.
-
-**Adicionar horários de atendimento:**  
-*No passo 4 do fluxo básico, caso a **Recepcionista** selecione a opção “Adicionar horários de atendimento”.*
-1. O sistema exibe o formulário de inclusão de horários.
-2. A **Recepcionista** adiciona um ou mais períodos. Para cada período, informa a data inicial e a data final (a mesma data, no caso de um único dia) e o intervalo de horário de atendimento (hora inicial e hora final).
-3. A **Recepcionista** clica em “Adicionar Horários”.
-4. O sistema valida os campos informados. Opcionalmente, a **Recepcionista** pode marcar a opção “Permanente” no período, alterando assim permanentemente a agenda daquele médico.
-5. O sistema solicita confirmação: “Deseja incluir os horários informados na agenda do médico?”.
-6. A **Recepcionista** confirma.
-7. O sistema gera os horários na agenda do médico, conforme a duração de consulta cadastrada para ele, marca-os como disponíveis e registra data, hora e **Recepcionista** responsável pela alteração.
-8. O sistema exibe a mensagem: “Horários incluídos com sucesso!”.
-9. O caso de uso é encerrado.
-   
-**Dados inválidos na inclusão de horários:**  
-*No passo 4 do fluxo alternativo “Adicionar horários de atendimento”, caso nenhum período tenha sido informado, alguma data não seja futura, a hora final não seja posterior à hora inicial, os períodos se sobreponham entre si, ou algum período coincida, total ou parcialmente, com horários em que o médico já atende ou com uma ausência registrada.*
-1. O sistema bloqueia a gravação.
-2. O sistema exibe mensagem descritiva indicando os períodos inconsistentes e o motivo (horário já existente na agenda ou ausência registrada).
-3. A **Recepcionista** corrige as informações e o fluxo retorna ao passo 2 do fluxo alternativo “Adicionar horários de atendimento”.
-
 **Desistência:**  
-*Entre os passos 5 e 10 do fluxo básico, ou em qualquer passo dos fluxos alternativos “Remover ausência” e “Adicionar horários de atendimento”, caso a **Recepcionista** cancele a operação ou não confirme.*
+*Entre os passos 5 e 10 do fluxo básico caso a **Recepcionista** cancele a operação ou não confirme.*
 1. O sistema descarta as informações e mantém a agenda do médico sem alteração.
 2. O caso de uso é encerrado.
 
@@ -341,18 +315,16 @@ _No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 > - A ausência é informada formalmente pelo médico por meio externo ao sistema (por exemplo, e-mail). O sistema não solicita anexo nem outra forma de comprovação.
 > - Somente datas futuras podem ser alteradas.
 > - É permitido registrar ausência em datas em que o médico já não atende.
-> - Período “Permanente”: o bloqueio ou inclusão vale a partir da data inicial, repetindo-se toda semana no mesmo dia da semana e horário, sem data final, ou seja, passa a ser um novo horário a mais ou a menos na agenda daquele médico, permanentemente.
 > - O sistema deve garantir controle de concorrência para evitar que uma ausência seja registrada e uma consulta seja agendada no mesmo horário simultaneamente.
 > - Horários bloqueados não são oferecidos no caso de uso “Agendar Consulta”.
-> - Somente ausências com datas futuras podem ser removidas.
 
 ### Condições Prévias:
 > - A **Recepcionista** deve estar autenticada no sistema com credenciais ativas.
 > - O médico deve estar cadastrado no sistema.
 
 ### Condições Posteriores:
-> - Registro: os horários abrangidos ficam indisponíveis na agenda do médico, a alteração é registrada (data, hora e **Recepcionista**). O sistema exibe a mensagem “Ausência registrada com sucesso!”.
-> - Remoção: os horários futuros voltam a ficar disponíveis, a alteração é registrada e o sistema exibe a mensagem “Ausência removida com sucesso!”.
-> - Inclusão: os novos horários ficam disponíveis na agenda do médico e no caso de uso “Agendar Consulta”, a alteração é registrada (data, hora e **Recepcionista**) e o sistema exibe a mensagem “Horários incluídos com sucesso!”.
+> - Os horários abrangidos ficam indisponíveis na agenda do médico
+> - A alteração é registrada (data, hora e **Recepcionista**). 
+> - O sistema exibe a mensagem “Ausência registrada com sucesso!”.
 
 ---
