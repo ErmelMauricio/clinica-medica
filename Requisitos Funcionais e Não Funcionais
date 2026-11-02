@@ -6,34 +6,43 @@ Requisitos não funcionais (RNF): descrevem critérios de qualidade, segurança,
 1. Cadastrar Paciente
 Ator principal: Recepcionista
 Requisitos funcionais (RF)
-    • RF01 O sistema deve permitir que a recepcionista cadastre um paciente com dados pessoais CPF, Nome, endereço e sexo , contato e informações de convênio, quando houver.
+    • RF01 O sistema deve permitir que a recepcionista cadastre um paciente com dados pessoais CPF, Nome,sobrenome 1, sobrenome 2, nome social,endereço, genero e sexo , contato (whatssap, telefone 1, telefone 2, e-mail) e informações de convênio, quando houver.
     • RF02 O sistema deve validar os campos obrigatórios e o formato dos dados informados.
-    • RF03 O sistema deve confirmar o sucesso do cadastro e permitir a atualização dos dados de um paciente existente
+    • RF03 O sistema deve validar o CPF
+    • RF04 O sistema armazena os dados do paciente no banco de dados.
+
 
 2. Agendar Consulta
 Atores principais: Recepcionista 
 Requisitos funcionais (RF)
-    • RF04 O sistema deve permitir selecionar paciente, especialidade médica, médico, data e horário disponíveis.
-    • RF05 O sistema deve consultar a agenda e exibir os horários disponíveis para o médico selecionado.
-    • RF06 O sistema deve impedir que duas consultas sejam marcadas para o mesmo médico no mesmo horário.
-    
+    • RF05 O sistema deve permitir selecionar paciente, especialidade médica, médico, data e horário disponíveis.
+    • RF06 O sistema deve mostrar os horarios disponiveis baseado nos filtros selecionados.
+    • RF07 O sistema mostra os horários disponíveis baseado nos filtros selecionados.
+    • RF08 O sistema deve exibir e recuperar os dados do paciente.
+    • RF09 A Recepcionista seleciona a especialidade médica e o médico desejado (existe a opção de não selecionar um médico, assim os horários mostrados são para todos os médicos daquela especialidade.
+    • RF10 O paciente deve estar cadastrado no sistema. 
+
 3. Cancelar Consulta
 Atores principais: Recepcionista
 Requisitos funcionais (RF)
-    • RF07 O sistema deve permitir localizar uma consulta agendada por paciente, data ou identificador da consulta.
-    • RF08 O sistema deve permitir que a recepcionista cancele uma consulta e que o paciente solicite o cancelamento de suas próprias consultas.
-    • RF09 Antes de concluir o cancelamento, o sistema deve solicitar confirmação da ação.
-    • RF10 Após o cancelamento, o sistema deve atualizar o status da consulta para “Cancelada”.
-    • RF11 O sistema deve liberar o horário cancelado na agenda do médico.
+    • RF09 A Recepcionista acessa a funcionalidade "Cancelar Consulta".
+    • RF10 A Recepcionista localiza o paciente informando o CPF ou nome do paciente.
+    • RF11 O sistema exibe as consultas futuras do paciente que não foram canceladas.
+    • RF12 A Recepcionista seleciona a consulta a ser cancelada.
+    • RF13 O sistema exibe os dados da consulta (médico, data, hora) e solicita confirmação.
+    • RF14 A Recepcionista seleciona a consulta a ser cancelada.
+    • RF15 A Recepcionista confirma o cancelamento.
+    • RF16 O sistema altera o status da consulta para "Cancelada", disponibiliza aquele horário na agenda daquele médico e registra data, hora e Recepcionista responsável pelo cancelamento.
+
     
 4.Lembrente de whassapp
 Atores principais: Recepcionista
 Requisitos funcionais (RF)
-    • RF12 O sistema deve exibir as consultas agendadas que ainda aguardam confirmação.
-    • RF13 O sistema deve permitir confirmar uma consulta selecionada, após verificar a identidade do usuário e sua permissão.
-    • RF14 O sistema deve atualizar o status da consulta para “Confirmada”.
-    • RF15 O sistema deve apresentar ao usuário a data, o horário, o médico e o resultado da confirmação.
-    • RF16 O sistema deve impedir a confirmação de consultas inexistentes, canceladas ou já realizadas.
+    • RF12 O sistema exibe as consultas com o status “Agendada” para as próximas 48 horas, da mais próxima para a mais distante, e que ainda não tiveram o lembrete enviado.
+    • RF13 O sistema monta a mensagem padrão (abaixo) com os dados da consulta.
+    • RF14 O sistema abre o aplicativo WhatsApp no dispositivo da Recepcionista, na conversa com o número de WhatsApp cadastrado do paciente, com a mensagem já preenchida.
+    • RF15 O sistema altera o status do lembrete da consulta para “Lembrete enviado”, registrando data, hora e Recepcionista responsável, e remove a consulta da lista principal.
+    • RF16 A Recepcionista acessa a funcionalidade “Lembretes de Consulta”.
 
 5.Editar Dados do Paciente
 Atores principais: Recepcionista
@@ -46,18 +55,32 @@ Requisitos funcionais (RF)
 6.Cadastrar Médico
 Atores principais: Recepcionista
 Requisitos funcionais (RF)
-    • RF21 O sistema deve permitir cadastrar médicos, incluindo nome, CRM, especialidade, telefone e e-mail.
-    • RF22 O sistema deve validar o preenchimento dos campos obrigatórios no cadastro do Médico.
-    • RF23 O sistema deve permitir consultar os dados de cada médico cadastrado.
-    • RF24 O sistema deve permitir editar e atualizar os dados dos Médicos cadastrados.
+    • RF21 A Recepcionista acessa a funcionalidade “Editar Dados do Paciente”.
+    • RF22 A Recepcionista informa o CPF ou o nome do paciente.
+    • RF23 O sistema lista os pacientes que correspondem à busca e a Recepcionista seleciona o paciente desejado.
+    • RF24 O sistema exibe os dados cadastrais atuais do paciente.
+    • RF25 A Recepcionista altera os dados desejados.
+    • RF26 A Recepcionista clica em “Salvar”.
+    • RF27 O sistema valida os campos e solicita confirmação: “Deseja salvar as alterações?”.
+    • RF28 A Recepcionista confirma.
 
-7.Consultar Agenda Médica
+
+7.Alterar Agenda Médica
 Atores principais: Recepcionista
 Requisitos funcionais (RF)
-    • RF25 O sistema deve permitir consultar a agenda de consultas por Médico e data.
-    • RF26 O sistema deve exibir os horarios disponiveis e os ocupados.
-    • RF27 O sistema deve permitir que a recepcionista visualize os agendamentos dos pacientes.
-    • RF28 O sistema deve permitir que o Médico consulte sua propria agenda na clinica. 
+    • RF25 A Recepcionista acessa a funcionalidade “Alterar Agenda Médica”.
+    • RF26 A Recepcionista informa o nome do médico.
+    • RF27 O sistema lista os médicos que correspondem à busca (nome, especialidade e CRM) e a Recepcionista seleciona o médico desejado.
+    • RF28 O sistema exibe os dados do médico, as ausências futuras já registradas, o formulário para registrar nova ausência.
+    • RF29 A Recepcionista informa o motivo da ausência e seleciona o(s) dia(s) e horário(s) que o médico se ausentará por aquele motivo. Para cada período, informa a data inicial e a data final (a mesma data, no caso de um único dia) e define se é o dia inteiro ou um intervalo de horário (hora inicial e hora final).
+    • RF30 A Recepcionista clica em “Registrar Ausência”.
+    • RF31 O sistema valida os campos informados. 
+    • RF32 O sistema verifica se existe consulta agendada em algum horário abrangido pelos períodos informados.
+    • RF33 O sistema solicita confirmação: “Deseja bloquear os horários informados na agenda do médico?”. 
+    • RF34 A Recepcionista confirma. 
+    • RF35 O sistema registra a ausência, marca como indisponíveis os horários da agenda do médico abrangidos pelos períodos e registra data, hora e Recepcionista responsável pela alteração.
+
+
   
 > - Cadastrar Paciente
 > - Agendar Consulta / Cancelar Consulta
@@ -109,7 +132,7 @@ Requisitos não funcionais (RNF)
     • RF20 O sistema deve salvar as alterações em até 3 segundos.
     • RF21 O sistema deve proteger os dados pessoais de cada médico cadastrado contra acessos não autorizados.
     
-7.Consultar Agenda Médica
+7.Alterar Agenda Médica
 Atores principais: Recepcionista
 Requisitos não funcionais (RNF)
     • RF22 O sistema deve permitir acesso a agenda conforme o perfil de cada usuario.
