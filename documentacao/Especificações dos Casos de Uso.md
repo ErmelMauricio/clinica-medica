@@ -84,7 +84,7 @@
 ---
 ## Caso de Uso 3: Lembrete de Consulta via WhatsApp
 
-> Permite à **Recepcionista** consultar as consultas agendadas para as próximas 48 horas e enviar ao Paciente um lembrete via WhatsApp, a partir de uma mensagem padrão. O intuito desta interação é ter atrito mínimo, ou seja, o cliente só irá interagir com a mensagem caso queira cancelar, do contrário apenas servirá como lembrete.
+> Permite à **Recepcionista** consultar as consultas agendadas para as próximas 48 horas e enviar ao Paciente um lembrete via WhatsApp, a partir de uma mensagem padrão. O intuito desta interação é ter atrito mínimo, ou seja, o paciente só irá interagir com a mensagem caso queira cancelar, do contrário apenas servirá como lembrete.
 
 ### Ator Principal:
 > **Recepcionista**.
@@ -270,7 +270,7 @@ _No passo 6 do fluxo básico, caso a **Recepcionista** opte por não confirmar._
 ---
 ## Caso de Uso 7: Alterar Agenda Médica
 
-> Permite à **Recepcionista** registrar ausências na agenda de um médico (dias ou intervalos de horário em que ele não atenderá, ou que passará a atender), informadas formalmente pelo médico fora do sistema, bloqueando esses horários para novos agendamentos. Também permite remover ausências registradas.
+> Permite à **Recepcionista** registrar ausências na agenda de um médico (dias ou intervalos de horário em que ele não atenderá), informadas formalmente pelo médico fora do sistema, bloqueando esses horários para novos agendamentos.
 
 ### Ator Principal:
 > **Recepcionista**.
