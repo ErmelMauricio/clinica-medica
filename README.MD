@@ -17,7 +17,7 @@ O Sistema de Gestão de Agenda Para Clínica Médica tem como objetivo gerir o p
 
 ### Quem utilizará o sistema?
 
-O sistema será utilizado unicamente pleas Recepcionistas.
+O sistema será utilizado unicamente pelas Recepcionistas.
 
 ### Qual problema o sistema pretende resolver?
 
