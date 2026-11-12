@@ -1,0 +1,11 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: agenda-mongo-demo
+    ports:
+      - "27017:27017"
+    volumes:
+      - dados_mongo_demo:/data/db
+volumes:
+  dados_mongo_demo:
+
